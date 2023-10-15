@@ -2,11 +2,8 @@ import pytest
 import os
 from src.item import Channel
 import json
-# @pytest.fixture
-# def channel():
-#     channel_id = "UC4yHMRbOxXJA6DfqXk0Y4Aw"
-#     return Channel(channel_id)
-channel_id = "UC4yHMRbOxXJA6DfqXk0Y4Aw"  # Замените на реальный ID канала
+
+channel_id = "UC4yHMRbOxXJA6DfqXk0Y4Aw"
 channel = Channel(channel_id)
 
 def test_channel_initialization():
