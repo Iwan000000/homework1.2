@@ -60,3 +60,66 @@ class Channel:
         with open(filename, "w") as file:
             json.dump(data, file)
 
+    def __str__(self):
+        """
+        Магический метод для отображения информации об объекте класса для пользователей
+        :return: Выводит название канала и ссылку на канал
+        """
+        return f"{self.channel_name} ({self.channel_link})"
+
+    def __add__(self, other):
+        """
+        Магический метод, который позволяет прибавлять к экземпляру класса объект произвольного типа данных
+        :param other: Проинимает колличество подписчиков
+        :return: Выводит сумму подписчиков двух каналов
+        """
+        return self.subscriber_count + other.subscriber_count
+
+    def __sub__(self, other):
+        """
+        Магический метод, который позволяет вычитать от экземпляра класса
+        :param other: Проинимает колличество подписчиков
+        :return: Выводит результат вычитания колличества подписчиков
+        """
+        return self.subscriber_count - other.subscriber_count
+
+    def __eq__(self, other):
+        """
+        Магический метод сравнения
+        :param other: Проинимает колличество подписчиков
+        :return: Выводит False если не равны и True если равны
+        """
+        return self.subscriber_count == other.subscriber_count
+
+    def __lt__(self, other):
+        """
+        Магический метод сравнения
+        :param other: Проинимает колличество подписчиков
+        :return: Выводит False или True если один канал больше или меньше другого
+        """
+        return self.subscriber_count < other.subscriber_count
+
+    def __ge__(self, other):
+        """
+        Магический метод сравнения
+        :param other: Проинимает колличество подписчиков
+        :return: Выводит False или True если один канал больше или меньше другого или равен
+        """
+        return self.subscriber_count >= other.subscriber_count
+
+    def __lt__(self, other):
+        """
+        Магический метод сравнения
+        :param other: Проинимает колличество подписчиков
+        :return: Выводит False или True если один канал больше или меньше другого или равен
+        """
+        return self.subscriber_count <= other.subscriber_count
+
+    def __gt__(self, other):
+        """
+        Магический метод сравнения
+        :param other: Проинимает колличество подписчиков
+        :return: Выводит False или True если один канал больше или меньше другого
+        """
+        return self.subscriber_count > other.subscriber_count
+
