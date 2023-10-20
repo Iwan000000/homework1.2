@@ -2,7 +2,6 @@ from item import Channel
 
 if __name__ == "__main__":
     channel_id = "UC4yHMRbOxXJA6DfqXk0Y4Aw"
-    channel_id = "UCwHL6WHUarjGfUM_586me8w"
     channel = Channel(channel_id)
 
     # Вывести данные о канале
