@@ -19,7 +19,7 @@ class Video:
         self.url = f'https://youtu.be/{dict_to_print["items"][0]["snippet"]["tags"][0]}'
         self.view_count = dict_to_print['items'][0]['statistics']['viewCount']
         self.likes_count = dict_to_print['items'][0]['statistics']['likeCount']
-
+        self.duration = self.get_duration()
     @classmethod
     def get_service(cls):
         """
@@ -29,12 +29,31 @@ class Video:
         api_key = os.environ.get("YOUTUBE_API_KEY")
         return build("youtube", "v3", developerKey=api_key)
 
+
     def __str__(self):
         """
         Магический метод для отображения информации об объекте класса для пользователей
         :return: Выводит информацию об объекте класса
         """
         return self.title
+
+    def get_duration(self):
+        """
+        Получает продолжительность видео
+        :return:Выводит продолжительность видео
+        """
+        youtube = Video.get_service()
+        dict_to_print = youtube.videos().list(id=self.video_id, part='snippet,contentDetails').execute()
+        duration = dict_to_print['items'][0]['contentDetails']['duration']
+        return duration
+
+    @property
+    def url_video(self):
+        """
+        Возвращает URL-адрес видео
+        :return:URL-адрес видео
+        """
+        return self.__url
 
 class PLVideo(Video):
     """
