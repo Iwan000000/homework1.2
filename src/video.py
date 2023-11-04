@@ -13,13 +13,24 @@ class Video:
         :param video_id: id видео из ютуб
         """
         self.video_id = video_id
-        youtube = Video.get_service()
-        dict_to_print = youtube.videos().list(id=self.video_id, part='snippet,statistics').execute()
-        self.title = dict_to_print['items'][0]['snippet']['title']
-        self.url = f'https://youtu.be/{dict_to_print["items"][0]["snippet"]["tags"][0]}'
-        self.view_count = dict_to_print['items'][0]['statistics']['viewCount']
-        self.likes_count = dict_to_print['items'][0]['statistics']['likeCount']
-        self.duration = self.get_duration()
+        try:
+            self.__info = self.get_service().videos().list(id=self.video_id, part='snippet,statistics,contentDetails').execute()
+            self.title = self.__info['items'][0]['snippet']['title']
+            self.__name = self.__info["items"][0]["snippet"]["title"]
+        except IndexError:
+            self.__info = None
+            self.__name = None
+            self.title = None
+            self.__url = None
+            self.like_count = None
+            self.__view_count = None
+            self.__duration = None
+
+        else:
+            self.__url = 'https://youtu.be/' + self.video_id
+            self.like_count = self.__info["items"][0]["statistics"]["likeCount"]
+            self.__view_count = self.__info["items"][0]["statistics"]["viewCount"]
+            self.__duration = self.__info["items"][0]['contentDetails']['duration']
     @classmethod
     def get_service(cls):
         """
